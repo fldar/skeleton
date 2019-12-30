@@ -1,0 +1,9 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_version: 12
+    database_user: docker
+    database_password: docker
+    database_host: postgres
+    database_port: '5432'
+    database_dbname: fantastic_clover_test
