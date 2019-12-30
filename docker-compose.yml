@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: fantastic-clover
+      POSTGRES_DB: fantastic
       PGDATA: /var/sql
     ports:
       - 5555:5432

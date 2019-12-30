@@ -67,6 +67,9 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
+        "pre-autoload-dump": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
@@ -97,6 +100,10 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "incenteev-parameters": {
+            "file": "config/packages/parameters.yml",
+            "dist-file": "config/parameters.yml.dist"
+        },
         "symfony": {
             "allow-contrib": false,
             "require": "5.0.*"
