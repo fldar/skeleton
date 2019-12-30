@@ -2,7 +2,7 @@ version: '3.7'
 services:
   postgres:
     image: postgres
-    container_name: postgres_fantastic
+    container_name: fantastic_postgres
     restart: always
     environment:
       POSTGRES_USER: docker
@@ -18,7 +18,7 @@ services:
       context: .docker/php-fpm
       args:
         TIMEZONE: ${TIMEZONE}
-    container_name: php_fantastic
+    container_name: fantastic_php
     volumes:
       - ../fantastic-clover:/projetos/fantastic-clover:cached
       - .docker/logs/symfony:/projetos/fantastic-clover/var/log:cached
@@ -26,7 +26,7 @@ services:
       - postgres
   nginx:
     build: .docker/nginx
-    container_name: nginx_fantastic
+    container_name: fantastic_nginx
     ports:
       - 8081:80
     links:
