@@ -18,9 +18,11 @@ class HomeController extends AbstractController
      */
     public function home(): Response
     {
+//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, 'You are not logged!');
+        
         return $this->json(
-            ["message" => "You are not logged!"],
-            Response::HTTP_FORBIDDEN
+            ["message" => "Nice!"],
+            Response::HTTP_OK
         );
     }
 }
