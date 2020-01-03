@@ -18,11 +18,21 @@ class HomeController extends AbstractController
      */
     public function home(): Response
     {
-//        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, 'You are not logged!');
-        
         return $this->json(
-            ["message" => "Nice!"],
+            ["message" => "You are success authenticated!"],
             Response::HTTP_OK
+        );
+    }
+    
+    /**
+     * @return Response
+     * @Route("/login", name="app_login", methods={"GET", "POST"})
+     */
+    public function relocated(): Response
+    {
+        return $this->json(
+            ['message' => 'You are note logged, please authenticate yourself!'],
+            Response::HTTP_NETWORK_AUTHENTICATION_REQUIRED
         );
     }
 }
