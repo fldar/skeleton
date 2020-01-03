@@ -8,10 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @package App\Controller
+ * @Route("/authentication", name="authentication")
+ */
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login", methods={"POST"})
+     * @return Response
+     * @param Request $request
+     * @Route("/login", name="login", methods={"POST"})
      */
     public function login(Request $request): Response
     {

@@ -20,7 +20,7 @@ security:
             logout:
                 path: app_logout
             json_login:
-                check_path: /login
+                check_path: /authentication/login
                 username_path: security.credentials.login
                 password_path: security.credentials.password
 
