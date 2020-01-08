@@ -25,5 +25,12 @@ security:
                 password_path: security.credentials.password
 
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        ## security::src/Controller/HomeController
+        - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
+
+        ## security::src/Controller/SecurityController
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        ## security::src/Controller/UserController@
+        - { path: ^/user/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/list, roles: [ROLE_ADMIN] }
