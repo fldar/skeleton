@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
