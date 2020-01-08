@@ -26,8 +26,8 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setName('admin');
-        $user->setUsername('Admin');
+        $user->setName('Admin Dev');
+        $user->setUsername('admin');
         $user->setEmail('admin@fantastic.com');
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordEncoder->encodePassword(

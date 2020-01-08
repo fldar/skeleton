@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -16,7 +18,7 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserLoaderInterface
 {
     /**
      * @param ManagerRegistry $registry
@@ -70,6 +72,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 u.email,
                 u.roles
             ')->getQuery()->getResult()
+            ;
+    }
+
+    /**
+     * @param string $username
+     * @return mixed|UserInterface|null
+     * @throws NonUniqueResultException
+     */
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username = :username')
+            ->orWhere('u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult()
             ;
     }
 }
