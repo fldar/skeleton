@@ -18,11 +18,6 @@ class SecurityController extends AbstractController
      */
     public function login(): Response
     {
-        $user = $this->getUser();
-
-        return $this->json([
-            'username' => $user->getUsername(),
-            'roles' => $user->getRoles(),
-        ]);
+        return $this->redirectToRoute('home');
     }
 }

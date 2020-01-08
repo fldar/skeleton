@@ -18,12 +18,9 @@ class HomeController extends AbstractController
      */
     public function home(): Response
     {
-        return $this->json(
-            ["message" => "You are success authenticated!"],
-            Response::HTTP_OK
-        );
+        return $this->json(["message" => "Hello {$this->getUser()->getName()}!"]);
     }
-    
+
     /**
      * @return Response
      * @Route("/login", name="app_login", methods={"GET", "POST"})
@@ -31,8 +28,8 @@ class HomeController extends AbstractController
     public function relocated(): Response
     {
         return $this->json(
-            ['message' => 'You are note logged, please authenticate yourself!'],
-            Response::HTTP_NETWORK_AUTHENTICATION_REQUIRED
+            ['message' => 'Session Expired!'],
+            Response::HTTP_BAD_REQUEST
         );
     }
 }
