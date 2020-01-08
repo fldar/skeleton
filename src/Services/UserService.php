@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Entity\User;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 /**
  * Class UserService
@@ -21,6 +23,8 @@ class UserService extends AbstractUser
     /**
      * @param string $user
      * @return User
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     final public function signin(string $user): User
     {
@@ -40,6 +44,8 @@ class UserService extends AbstractUser
         $user = new User();
 
         $user->setEmail($userData->email)
+            ->setName($userData->name)
+            ->setUsername($userData->username)
             ->setPassword($this->encodePassword($user, $userData->password));
 
         return $user;

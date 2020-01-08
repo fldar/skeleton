@@ -14,7 +14,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
@@ -56,5 +55,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
 
         return $user;
+    }
+
+    /**
+     * @return User[]|array
+     */
+    public function findAll(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('
+                u.id,
+                u.name,
+                u.username,
+                u.email,
+                u.roles
+            ')->getQuery()->getResult()
+            ;
     }
 }
