@@ -23,6 +23,14 @@ security:
                 username_path: security.credentials.login
                 password_path: security.credentials.password
 
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN:
+            - ROLE_USER
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
+
     access_control:
         ## security::src/Controller/HomeController
         - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
