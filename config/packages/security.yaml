@@ -22,9 +22,6 @@ security:
                 check_path: /authentication/login
                 username_path: security.credentials.login
                 password_path: security.credentials.password
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800
 
     access_control:
         ## security::src/Controller/HomeController
@@ -32,7 +29,6 @@ security:
 
         ## security::src/Controller/SecurityController
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/authentication/re-login, roles: [IS_AUTHENTICATED_REMEMBERED] }
 
         ## security::src/Controller/UserController@
         - { path: ^/user/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }

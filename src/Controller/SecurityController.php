@@ -20,13 +20,4 @@ class SecurityController extends AbstractController
     {
         return $this->redirectToRoute('home');
     }
-
-    /**
-     * @Route("/re-login", name="/remember_not", methods={"GET"})
-     * @return Response
-     */
-    public function reLogin(): Response
-    {
-        return $this->redirectToRoute('home');
-    }
 }
