@@ -15,7 +15,7 @@ class ExceptionHandleAbstract implements ExceptionHandleInterface
     public function handle(Throwable $exception): Response
     {
         $response = new JsonResponse($this->traitContent($exception));
-        $response->setStatusCode(Response::HTTP_BAD_REQUEST);
+        $response->setStatusCode($this->getStatusCode());
 
         return $response;
     }
@@ -31,5 +31,13 @@ class ExceptionHandleAbstract implements ExceptionHandleInterface
             'file' => $exception->getFile(),
             'line' => $exception->getLine()
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode(): int
+    {
+        return Response::HTTP_BAD_REQUEST;
     }
 }

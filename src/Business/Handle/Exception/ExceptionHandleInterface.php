@@ -18,4 +18,9 @@ interface ExceptionHandleInterface
      * @return array
      */
     public function traitContent(Throwable $exception): array;
+
+    /**
+     * @return int
+     */
+    public function getStatusCode(): int;
 }

@@ -5,7 +5,7 @@ namespace App\Listener;
 use App\Business\Handle\Exception\ExceptionHandle;
 use App\Business\Handle\Exception\AccessDeniedHandle;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * @package App\Listener
@@ -21,7 +21,7 @@ class ExceptionListener
         $response = null;
 
         switch ($exception) {
-            case $exception instanceof AccessDeniedException:
+            case $exception instanceof AccessDeniedHttpException:
                 $response = (new AccessDeniedHandle())->handle($exception);
                 break;
             default:
