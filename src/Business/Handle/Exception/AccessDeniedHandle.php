@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class AccessDeniedHandle extends ExceptionHandleAbstract
 {
     /** @var string  */
-    private const MESSAGE = 'Your user does not have permission to access this functionality.';
+    private const MESSAGE = 'Your user dont have permission to access this functionality.';
 
     /**
      * @param Throwable $exception
