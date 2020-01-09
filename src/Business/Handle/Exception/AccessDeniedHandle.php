@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AccessDeniedHandle extends ExceptionHandleAbstract
 {
+    /** @var string  */
+    private const MESSAGE = 'Your user does not have permission to access this functionality.';
+
     /**
      * @param Throwable $exception
      * @return array
@@ -14,7 +17,7 @@ class AccessDeniedHandle extends ExceptionHandleAbstract
     public function traitContent(Throwable $exception): array
     {
         return [
-            'message' => $exception->getMessage(),
+            'message' => self::MESSAGE,
         ];
     }
 
