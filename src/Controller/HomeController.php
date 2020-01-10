@@ -18,9 +18,18 @@ class HomeController extends AbstractController
      */
     public function home(): Response
     {
+        return $this->json(["message" => "Hello {$this->getUser()->getName()}!"]);
+    }
+
+    /**
+     * @return Response
+     * @Route("/login", name="app_login", methods={"GET", "POST"})
+     */
+    public function relocated(): Response
+    {
         return $this->json(
-            ["message" => "You are not logged!"],
-            Response::HTTP_FORBIDDEN
+            ['message' => 'Session Expired!'],
+            Response::HTTP_BAD_REQUEST
         );
     }
 }

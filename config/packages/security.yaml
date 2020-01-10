@@ -1,22 +1,43 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
     providers:
-        in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: lazy
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+            json_login:
+                check_path: /authentication/login
+                username_path: security.credentials.login
+                password_path: security.credentials.password
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN:
+            - ROLE_USER
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        ## security::src/Controller/HomeController
+        - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
+
+        ## security::src/Controller/SecurityController
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        ## security::src/Controller/UserController@
+        - { path: ^/user/signin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/list, roles: [ROLE_ADMIN] }

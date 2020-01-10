@@ -2,9 +2,10 @@
 
 namespace App\Listener;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Business\Handle\Exception\ExceptionHandle;
+use App\Business\Handle\Exception\AccessDeniedHandle;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * @package App\Listener
@@ -16,21 +17,18 @@ class ExceptionListener
      */
     public function onKernelException(ExceptionEvent $event): void
     {
-        $response = new JsonResponse($this->traitContent($event->getThrowable()));
-        $response->setStatusCode(Response::HTTP_BAD_REQUEST);
-        $event->setResponse($response);
-    }
+        $exception = $event->getThrowable();
+        $response = null;
 
-    /**
-     * @param \Throwable $exception
-     * @return array
-     */
-    private function traitContent(\Throwable $exception): array
-    {
-        return [
-            'message' => $exception->getMessage(),
-            'file' => $exception->getFile(),
-            'line' => $exception->getLine()
-        ];
+        switch ($exception) {
+            case $exception instanceof AccessDeniedHttpException:
+                $response = (new AccessDeniedHandle())->handle($exception);
+                break;
+            default:
+                $response = (new ExceptionHandle())->handle($exception);
+                break;
+        }
+
+        $event->setResponse($response);
     }
 }

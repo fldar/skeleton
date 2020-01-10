@@ -1,0 +1,7 @@
+### PROJETO
+.docker/logs/
+.idea/
+var/
+vendor/
+.docker/sql/
+###
