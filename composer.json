@@ -34,6 +34,8 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "phpmd/phpmd": "^2.8",
+        "symfony/browser-kit": "5.0.*",
+        "symfony/css-selector": "5.0.*",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.0",
@@ -95,6 +97,13 @@
             "docker-compose exec -T php ./vendor/bin/phpcs src/ --standard=PSR12 -p --ignore=*/Migrations/*"
         ],
         "phpunit": [
+            "docker-compose exec -T php bin/console doctrine:database:drop --force --if-exists --env=test",
+            "docker-compose exec -T php bin/console doctrine:database:create --env=test",
+            "docker-compose exec -T php bin/console doctrine:migrations:migrate --no-interaction --env=test",
+            "docker-compose exec -T php bin/console doctrine:fixtures:load --env=test",
+            "docker-compose exec -T php bin/phpunit -v --coverage-text"
+        ],
+        "phpunit-html": [
             "docker-compose exec -T php bin/console doctrine:database:drop --force --if-exists --env=test",
             "docker-compose exec -T php bin/console doctrine:database:create --env=test",
             "docker-compose exec -T php bin/console doctrine:migrations:migrate --no-interaction --env=test",

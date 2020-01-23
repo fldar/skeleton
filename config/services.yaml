@@ -20,3 +20,8 @@ services:
     App\Subscriber\ExceptionSubscriber:
         tags:
             - { name: kernel.event_subscriber, event: kernel.exception }
+
+    doctrine.orm.naming_strategy.underscore:
+        class: Doctrine\ORM\Mapping\UnderscoreNamingStrategy
+        arguments:
+            $numberAware: true
