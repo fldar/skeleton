@@ -1,7 +1,15 @@
 ### PROJETO
+!.docker
 .docker/logs/
 .idea/
 var/
 vendor/
 .docker/sql/
 ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+reports
+bin/.phpunit
+###< phpunit/phpunit ###

@@ -25,7 +25,6 @@
         <whitelist>
             <directory>src/Repository/</directory>
             <directory>src/Services/</directory>
-            <directory>src/Controller/</directory>
         </whitelist>
     </filter>
 
