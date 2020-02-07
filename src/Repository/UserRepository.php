@@ -36,10 +36,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
     final public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
-        if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
-        }
-
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
@@ -72,7 +68,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 u.email,
                 u.roles
             ')->getQuery()->getResult()
-            ;
+        ;
     }
 
     /**
@@ -89,6 +85,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }

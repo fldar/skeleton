@@ -16,16 +16,15 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Skeleton">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>src/Repository/</directory>
             <directory>src/Services/</directory>
-            <directory>src/Controller/</directory>
+            <directory>src/Repository/</directory>
         </whitelist>
     </filter>
 
