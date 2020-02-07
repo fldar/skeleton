@@ -72,7 +72,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 u.email,
                 u.roles
             ')->getQuery()->getResult()
-            ;
+        ;
     }
 
     /**
@@ -89,6 +89,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 }
