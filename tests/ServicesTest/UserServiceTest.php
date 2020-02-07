@@ -30,7 +30,8 @@ class UserServiceTest extends KernelTestCase
             ->getManager();
 
         $this->userRepository = $this->entityManager
-            ->getRepository(User::class);
+            ->getRepository(User::class)
+        ;
 
         $encoder = [];
         $encoder['App\Entity\User'] = $this->getEncodersArray();
