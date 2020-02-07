@@ -65,6 +65,17 @@ class UserServiceTest extends KernelTestCase
     }
 
     /**
+     * @group UserService
+     * @group Services
+     */
+    public function testGetUsers()
+    {
+        $users = $this->userService->getUsers();
+        
+        $this->assertIsArray($users);
+    }
+
+    /**
      * @return array
      */
     public function userProviders(): array
