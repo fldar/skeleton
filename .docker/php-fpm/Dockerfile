@@ -28,5 +28,5 @@ COPY symfony.pool.conf /usr/local/etc/php/php-fpm.d/
 
 CMD ["php-fpm", "-F"]
 
-WORKDIR /projetos/fantastic-clover
+WORKDIR /projetos/skeleton
 EXPOSE 9000
