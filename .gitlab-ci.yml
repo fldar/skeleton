@@ -34,4 +34,4 @@ phpunit:
     - bin/console doctrine:database:create --env=test
     - bin/console doctrine:migrations:migrate --no-interaction --env=test
     - bin/console doctrine:fixtures:load --env=test
-    - bin/phpunit --coverage-text --colors=never --coverage-clover=coverage.xml
+    - ./vendor/bin/simple-phpunit --coverage-text --colors=never --coverage-clover=coverage.xml
