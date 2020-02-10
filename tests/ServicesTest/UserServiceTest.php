@@ -21,7 +21,7 @@ class UserServiceTest extends KernelTestCase
     /** @var UserService */
     private $userService;
     
-    public function setUp()
+    public function setUp(): void
     {
         $kernel = self::bootKernel();
 
