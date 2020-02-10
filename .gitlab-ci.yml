@@ -34,6 +34,6 @@ phpunit:
     - bin/console doctrine:database:create --env=test
     - bin/console doctrine:migrations:migrate --no-interaction --env=test
     - bin/console doctrine:fixtures:load --env=test
-    - ./vendor/bin/phpunit --coverage-text --colors=never --coverage-clover=coverage.xml
+    - ./vendor/bin/phpunit --coverage-text --colors=never --coverage-text --colors=never
   after_script:
     - bash <(curl -s https://codecov.io/bash) -t 3f903d13-8853-4310-ab2f-7cbb8f4fdc5f
