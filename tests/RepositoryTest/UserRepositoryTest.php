@@ -32,24 +32,24 @@ class UserRepositoryTest extends AdvancedTestCase
         ;
     }
     
-//    /**
-//     * @group UserRepository
-//     * @group Repository
-//     *
-//     * @throws NonUniqueResultException
-//     */
-//    public function testFindUsername()
-//    {
-//        $users = $this->userRepository->findAll();
-//        $userTest = null;
-//        
-//        foreach ($users as $user) {
-//            $userTest = $this->userRepository->loadUserByUsername($user['username']);
-//            break;
-//        }
-//        
-//        $this->assertIsInt($userTest->getId());
-//    }
+    /**
+     * @group UserRepository
+     * @group Repository
+     *
+     * @throws NonUniqueResultException
+     */
+    public function testFindUsername()
+    {
+        $users = $this->userRepository->findAll();
+        $userTest = null;
+        
+        foreach ($users as $user) {
+            $userTest = $this->userRepository->loadUserByUsername($user['username']);
+            break;
+        }
+        
+        $this->assertIsInt($userTest->getId());
+    }
 
     /**
      * @group UserRepository
@@ -70,16 +70,16 @@ class UserRepositoryTest extends AdvancedTestCase
         $this->assertIsInt($userTest->getId());
     }
 
-    /**
-     * @group UserRepository
-     * @group Repository
-     */
-    public function testUpgradePassword()
-    {
-        $user = $this->userRepository->loadUserByUsername('admin');
-
-        $this->userRepository->upgradePassword($user, 'aushdasd');
-
-        $this->assertIsInt($user->getId());
-    }
+//    /**
+//     * @group UserRepository
+//     * @group Repository
+//     */
+//    public function testUpgradePassword()
+//    {
+//        $user = $this->userRepository->loadUserByUsername('admin');
+//
+//        $this->userRepository->upgradePassword($user, 'aushdasd');
+//
+//        $this->assertIsInt($user->getId());
+//    }
 }
