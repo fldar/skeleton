@@ -1,0 +1,39 @@
+image: php:7.3-fpm-alpine
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: skeleton_test
+  POSTGRES_USER: docker
+  POSTGRES_PASSWORD: docker
+
+cache:
+  paths:
+    - vendor/
+    - ~/.composer/cache/files
+
+before_script:
+  - apk update && apk add curl bash coreutils make openssl git unzip autoconf postgresql-dev
+  - docker-php-ext-install pdo_pgsql
+  - apk add --no-cache $PHPIZE_DEPS && pecl install xdebug && docker-php-ext-enable xdebug
+  - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+  - composer install -n
+
+phpcs:
+  script:
+    - ./vendor/bin/phpcs src/ --standard=PSR12 -p --ignore=*/Migrations/*
+
+phpmd:
+  script:
+    - ./vendor/bin/phpmd src/ text cleancode, codesize, controversial, design, naming, unusedcode
+
+phpunit:
+  script:
+    - bin/console doctrine:database:drop --force --if-exists --env=test
+    - bin/console doctrine:database:create --env=test
+    - bin/console doctrine:migrations:migrate --no-interaction --env=test
+    - bin/console doctrine:fixtures:load --env=test
+    - ./vendor/bin/phpunit --coverage-text --colors=never --coverage-clover=coverage.xml
+  after_script:
+    - bash <(curl -s https://codecov.io/bash) -t 3f903d13-8853-4310-ab2f-7cbb8f4fdc5f
