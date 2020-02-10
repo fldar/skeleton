@@ -96,6 +96,9 @@
         "phpcs": [
             "docker-compose exec -T php ./vendor/bin/phpcs src/ --standard=PSR12 -p --ignore=*/Migrations/*"
         ],
+        "phpmd": [
+            "docker-compose exec -T php ./vendor/bin/phpmd src/ text cleancode, codesize, controversial, design, naming, unusedcode --exclude src/Security"
+        ],
         "phpunit": [
             "docker-compose exec -T php bin/console doctrine:database:drop --force --if-exists --env=test",
             "docker-compose exec -T php bin/console doctrine:database:create --env=test",
