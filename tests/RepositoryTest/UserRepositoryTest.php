@@ -19,7 +19,7 @@ class UserRepositoryTest extends AdvancedTestCase
     /** @var UserRepository */
     private $userRepository;
 
-    public function setUp()
+    public function setUp(): void
     {
         $kernel = self::bootKernel();
 

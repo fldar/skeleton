@@ -1,0 +1,42 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docphpker
+      POSTGRES_DB: skeleton
+    ports:
+      - 5555:5432
+  php:
+    build:
+      context: .docker/php-fpm
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ../skeleton:/projetos/skeleton
+      - .docker/logs/symfony:/projetos/skeleton/var/log
+    links:
+      - db
+  nginx:
+    build: .docker/nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    links:
+      - php
+    volumes:
+      - .docker/logs/nginx:/var/log/nginx
+      - ../skeleton:/projetos/skeleton
+  elk:
+    image: willdurand/elk
+    ports:
+      - 81:80
+    volumes:
+      - .docker/elk/logstash:/etc/logstash
+      - .docker/elk/logstash/patterns:/opt/logstash/patterns
+    volumes_from:
+      - php
+      - nginx
